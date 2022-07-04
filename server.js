@@ -5,6 +5,9 @@ import cors from 'cors'
 
 import { router as profilesRouter } from './routes/profiles.js'
 import { router as authRouter } from './routes/auth.js'
+import { router as devicesRouter } from './routes/devices.js'
+import { router as readingsRouter } from './routes/readings.js'
+import { router as sensorsRouter } from './routes/sensors.js'
 
 import('./config/database.js')
 
@@ -14,8 +17,11 @@ app.use(cors())
 app.use(logger('dev'))
 app.use(express.json())
 
-app.use('/api/profiles', profilesRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/profiles', profilesRouter)
+app.use('/api/devices', devicesRouter)
+app.use('/api/readings', readingsRouter)
+app.use('/api/sensors', sensorsRouter)
 
 app.use(function (req, res, next) {
   res.status(404).json({ err: "Not found" })
