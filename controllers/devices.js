@@ -1,5 +1,6 @@
 import { Device } from "../models/device.js"
 import { Profile } from "../models/profile.js"
+import { Reading } from "../models/reading.js"
 
 function index(req, res) {
   Device.find({})
@@ -20,10 +21,17 @@ function create(req, res) {
       res.status(500).json({err: 'Not Authorized'})
     }
   })
-  
+}
+
+function show(req, res) {
+  Reading.find({'device': req.params.id})
+  .then(readings => {
+    res.json(readings)
+  })
 }
 
 export {
   index,
-  create
+  create,
+  show
 }
